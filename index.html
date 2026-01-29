@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>S-Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+   
+
+
+
+
+   <nav class="navbar">
+  <div class="nav-left">
+    <span class="logo">🌦️ S-Weather</span>
+  </div>
+
+  <div class="nav-right">
+    <button id="themeToggle" class="theme-btn">🌙</button>
+  </div>
+</nav>
+
+
+
+
+<section class="search-section">
+  <h2 id="cityTitle">Search City</h2>
+
+  <div class="search-box">
+    <input id="cityInput" placeholder="Enter city name" />
+    <button id="searchBtn">Search</button>
+  </div>
+</section>
+
+
+    <main class="container">
+      <!-- CURRENT WEATHER -->
+      <section id="current" class="weather-card">
+        <h3 id="cityName"></h3>
+
+        <div class="main-weather">
+          <div id="icon" class="icon"></div>
+          <p id="temperature"></p>
+        </div>
+
+        <div class="details">
+          <p id="feelsLike"></p>
+          <p id="humidity"></p>
+          <p id="wind"></p>
+          <p id="rainChance"></p>
+        </div>
+      </section>
+
+      <!-- HOURLY FORECAST -->
+      <section id="hourly" class="weather-card">
+        <h3>Hourly Forecast</h3>
+        <div id="hourlyContainer"></div>
+      </section>
+
+      <!-- FORECAST -->
+      <section id="forecast"></section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
