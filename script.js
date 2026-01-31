@@ -6,6 +6,10 @@ const temperature = document.getElementById("temperature");
 const rainChance = document.getElementById("rainChance");
 const forecastDiv = document.getElementById("forecast");
 const hourlyContainer = document.getElementById("hourlyContainer");
+const icon = document.getElementById("icon");
+const themeToggle = document.getElementById("themeToggle");
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
 
@@ -246,7 +250,72 @@ async function searchWeather(city) {
   }
 }
 
-window.onload = loadCity;   
+// Geolocation functions
+function getUserLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      showPosition,
+      showError
+    );
+  } else {
+    console.log("Geolocation not supported");
+  }
+}
+function showPosition(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+
+  loadWeatherByCoords(latitude, longitude);
+}
+
+
+async function loadWeatherByCoords(lat, lon) {
+  const weatherData = await getWeather(lat, lon);
+
+  showCurrentWeather("Your Location", weatherData);
+  showHourly(weatherData);
+  showForecast(weatherData);
+}
+
+
+// Handle geolocation error
+
+function showError(error) {
+  console.log("User denied location");
+  searchWeather("Karachi");
+}
+
+//  Fetch weather by coordinates
+function fetchWeather(lat, lon) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      displayWeather(data);
+    })
+    .catch(error => console.log(error));
+}
+
+function displayWeather(data) {
+  const temp = data.current_weather.temperature;
+  const wind = data.current_weather.windspeed;
+
+  document.getElementById("temp").innerText = temp + "°C";
+  document.getElementById("wind").innerText = wind + " km/h";
+}
+
+window.onload = () => {
+  getUserLocation();
+    loadCity(); 
+};
+
+
+
+
+
+
+
 
 
 
